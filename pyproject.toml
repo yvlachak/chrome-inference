@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chrome-inference"
+version = "0.1.0"
+description = "Expose Chrome Built-in AI as a localhost inference provider"
+requires-python = ">=3.10"
+readme = "README.md"
+license = { text = "Proprietary" }
+authors = [{ name = "Yanni Vlachakis" }]
+dependencies = []
+
+[project.scripts]
+chrome-inference-server = "chrome_inference.server:main"
+chrome-inference = "chrome_inference.client:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+chrome_inference = ["web/*.html", "web/*.js"]
