@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chrome Inference Worker</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color-scheme: dark; }
+    body { max-width: 860px; margin: 40px auto; padding: 0 20px; background: #111; color: #eee; }
+    .card { border: 1px solid #333; border-radius: 12px; padding: 18px; margin: 16px 0; background: #181818; }
+    .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .status { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+    button { padding: 9px 14px; border-radius: 8px; border: 1px solid #555; background: #252525; color: #fff; cursor: pointer; }
+    button:hover { background: #303030; }
+    textarea { width: 100%; min-height: 90px; box-sizing: border-box; background: #101010; color: #eee; border: 1px solid #444; border-radius: 8px; padding: 10px; }
+    pre { white-space: pre-wrap; word-break: break-word; background: #0c0c0c; border-radius: 8px; padding: 12px; max-height: 340px; overflow: auto; }
+    code { color: #c7d7ff; }
+    .muted { color: #aaa; }
+  </style>
+</head>
+<body>
+  <h1>Chrome Inference Worker</h1>
+  <p class="muted">Keep this page open. It executes localhost broker jobs using Chrome Built-in AI; model weights remain managed by Chrome.</p>
+
+  <section class="card">
+    <h2>Runtime</h2>
+    <div class="status" id="status">Detecting Chrome Built-in AI…</div>
+    <div class="row" style="margin-top: 12px">
+      <button id="initialize">Initialize / download models</button>
+      <button id="refresh">Refresh capabilities</button>
+    </div>
+    <p class="muted">If availability is <code>downloadable</code>, Chrome requires a user gesture before the model download can begin. Use the initialize button.</p>
+  </section>
+
+  <section class="card">
+    <h2>Direct test</h2>
+    <textarea id="prompt">Classify this sentence as FACT, INFERENCE, or OPINION: The shipment will probably arrive late.</textarea>
+    <div class="row" style="margin-top: 12px">
+      <button id="run-test">Run local prompt</button>
+    </div>
+    <pre id="test-output">No test run yet.</pre>
+  </section>
+
+  <section class="card">
+    <h2>Worker log</h2>
+    <pre id="log"></pre>
+  </section>
+
+  <script src="/worker.js"></script>
+</body>
+</html>
